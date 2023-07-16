@@ -1,0 +1,33 @@
+export interface fc03model {
+    analitico_1:       string;
+    analitico_2:       string;
+    area:              string;
+    cantidad:          number;
+    cuenta:            number;
+    dependencia:       string;
+    descripcion:       string;
+    entidad:           string;
+    fecha:             string;
+    fecha_incorp:      string;
+    fecha_informe:     string;
+    items:             string;
+    iva:               number;
+    numero:            string;
+    numero_informe:    string;
+    origen:            string;
+    origen_movi:       string;
+    reparticion:       string;
+    rotulado:          string;
+    signo:             string;
+    sub_cuenta:        number;
+    sub_total:         number;
+    tipo:              string;
+    totales:           number;
+    unidad_jerarquica: string;
+    valor_total:       number;
+    valor_unitario:    number;
+    vida_util:         string;
+    reparticion_cod:   string;
+    dependencia_cod:   string;
+    cont_informe:      number;
+}

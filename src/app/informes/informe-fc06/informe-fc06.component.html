@@ -1,0 +1,12 @@
+<h2>Inventario de bienes de uso consolidado</h2>
+
+<div class="container">
+  <label for="desde">Año</label>
+    <select class="form-control" name="year" [(ngModel)]="yearSelect" >
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+    </select>
+    <br>
+
+    <button class="btn btn-info" (click)="generarInformeF05()">Generar Informe</button>
+</div>

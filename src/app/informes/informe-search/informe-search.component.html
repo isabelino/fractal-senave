@@ -1,0 +1,130 @@
+
+
+
+
+
+<div class="container">
+    <div class="row">
+
+      <h3>Seleccione el informe a buscar:</h3>
+
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="seleccion">
+        <option *ngFor="let item of itemSeleccion" [value]="item">{{item}}
+        </option>
+      </select>
+
+
+      <p>eleccion:{{seleccion}}</p>
+
+      <div *ngIf="seleccion=='fc03'">
+          <div class="container">
+            <div class="row">
+              <h4>Filtrar por:</h4>
+              <input class="form-cont" type="text" name="filterNumeroInforme" [(ngModel)]="searchdatofc03">
+
+
+              <button class="btn btn-info" (click)="cambios();">buscar</button>
+            </div>
+
+          </div>
+            <table>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Numero</th>
+                        <!--<th scope="col">Cuenta</th>-->
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of copydatofc03 | filter:searchdatofc03 " >
+                        <td scope="row">{{item.cont_informe}}</td>
+
+                        <td>{{item.fecha_informe}}</td>
+
+                        <td><button class="btn btn-info" (click)="this.generarInforme2(item.items,item)">Ver Informe</button></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+            </table>
+
+      </div>
+
+        <div *ngIf="seleccion=='fc04'">
+          <div class="container">
+            <div class="row">
+              <h4>Filtrar por:</h4>
+              <input class="form-cont" type="text" name="filterNumeroInforme" [(ngModel)]="searchdatofc04">
+
+
+              <button class="btn btn-info" (click)="cambios2();">buscar</button>
+            </div>
+
+          </div>
+            <table>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Numero</th>
+                        <!--<th scope="col">Cuenta</th>-->
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item2 of copydatofc04 | filter:searchdatofc04" >
+                        <td scope="row">{{item2.cont_informe}}</td>
+                        <!--<td>{{item2.cuenta}}</td>-->
+                        <td>{{item2.fecha_informe}}</td>
+
+                        <td><button class="btn btn-info" (click)="this.generarInformefc04(item2.items ,item2)">Ver Informe</button></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+            </table>
+
+          </div>
+      <div *ngIf="seleccion=='fc10'">
+          <div class="container">
+            <div class="row">
+              <h4>Filtrar por:</h4>
+              <input class="form-cont" type="text" name="filterNumeroInforme" [(ngModel)]="searchdatofc10">
+
+
+              <button class="btn btn-info" (click)="cambios3();">buscar</button>
+            </div>
+
+          </div>
+            <table>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Numero</th>
+                        <!--<th scope="col">Cuenta</th>-->
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item3 of copydatofc10 | filter:searchdatofc10" >
+                        <td scope="row">{{item3.cont_informe}}</td>
+                        <!--<td>{{item3.cuenta}}</td>-->
+                        <td>{{item3.fecha_informe}}</td>
+
+                        <td><button class="btn btn-info" (click)="this.generarInformefc10(item3.items ,item3)">Ver Informe</button></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+            </table>
+        </div>
+
+
+  </div>
+</div>

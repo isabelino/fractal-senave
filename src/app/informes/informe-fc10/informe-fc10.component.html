@@ -1,0 +1,489 @@
+<label style="display: none;">Cantidad de informes FC10: {{this.contador}}</label>
+<div class="container">
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+
+
+
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Complete los Datos
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+
+        <div class="text-center row" >
+          <div class="alert alert-primary" role="alert">
+            <h3>Seleccione tipo de Informe</h3>
+          </div>
+
+            <button type="button" (click)="tipoInforme('total')" [disabled]="this.tipoInfo===true" class="btn btn-primary btn-lg" style="width: 50%;">Total</button>
+            <button type="button" (click)="tipoInforme('parcial')" [disabled]="this.tipoInfo===false" class="btn btn-info btn-lg" style="width: 50%;">Parcial</button>
+
+          </div>
+
+          <div *ngIf="this.tipoInfo; else parcial">
+            <div class="text-center" >
+              <h4>Ha seleccionado Informe total</h4>
+            </div>
+          </div>
+          <ng-template #parcial>
+            <div class="text-center" >
+              <h4>Ha seleccionado Informe Parcial</h4>
+            </div>
+
+          </ng-template>
+
+
+
+        <div style="float: right;margin: 10px;" *ngIf="this.habilitarBoton">
+          <button type="submit" class="btn btn-primary " (click)="nuevoInforme()" >Nuevo Informe</button>
+        </div>
+        <br>
+
+          <div *ngIf=" this.valorInforme==='total' ">
+
+            <div>
+              <input class="form-control" type="date" name="search" [(ngModel)]="searchText2" autocomplete="off" placeholder="Ingrese filtro de fecha opcional ejemplo 2000-01-10" value="2000-01-01">
+            </div>
+            <br>
+            <div>
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Ingrese palabra clave para buscar localización">
+            </div>
+
+
+
+            <label for="">Filtrar por Localización:</label>
+            <select name="prueba"  class="form-control" [(ngModel)]="localizacion" (change)="seleccionarLocalizacion()">
+              <option *ngFor="let item of datos | filter:searchText"  [ngValue]="item.code">
+              {{item.description}}</option>
+
+            </select>
+
+
+
+
+
+
+
+            <br>
+            <div class="container" >
+              <div class="row">
+                <label for="" *ngIf="cantidadBienesLocalizado != 0">Esta localizacion tiene asignada {{cantidadBienesLocalizado}} bienes activos</label>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+            <br>
+            <div class="container">
+              <div class="row">
+
+                <ul>
+
+                  <li *ngFor="let item of bien">
+                    nombre: {{item.descripcion}} - cantidad: {{item.cantidad}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="this.valorInforme==='parcial'">
+
+           <label >Ingrese el rótulo</label>
+           <form class="justify-content-center" (ngSubmit)="buscar()">
+              <input type="text" name="codigo" class="form-control" placeholder="codigo"
+                [(ngModel)]="codigobien" maxlength="50">
+              <br>
+              <button  class="btn btn-primary mt-4" type="submit">Buscar</button>
+              <br>
+
+              <label *ngIf="this.resultadoConsulta" for="">Resultado: {{this.resultadoConsulta.description}}</label>
+            </form>
+
+            <br>
+
+
+            <form class="justify-content-center" (ngSubmit)="guardar()">
+              <button type="submit" class="btn btn-primary mt-4">Agregar</button>
+            </form>
+            <br>
+            <div class="container" *ngIf="this.nuevoArray.length > 0">
+              <div class="row">
+                <br>
+                <label for="">Items agregados</label>
+
+
+                <ul>
+                  <li *ngFor="let item of nuevoArray;let indice=index">{{item.descripcion}} - <button type="button" (click)="eliminar(indice)" class="btn btn-danger btn-xs" style="font-size: 8px">ELIMINAR</button>
+                  </li>
+
+                </ul>
+                <br>
+              </div>
+            </div>
+          </div>
+
+
+          <label >Repartición</label>
+          <select class="form-select" aria-label="Default select example" name="reparticion" [(ngModel)]="repart" (change)="separarReparticion();">
+            <option value="01-Presidencia">Presidencia</option>
+            <option value="02-Secretaría De Relaciones Externas">Secretaría De Relaciones Externas</option>
+            <option value="03-Secretaría de Planificación">Secretaría de Planificación</option>
+            <option value="04-Dirección General de Administración y Finanzas">Dirección General de Administración y Finanzas</option>
+            <option value="05-Dirección de Finanzas">Dirección de Finanzas</option>
+            <option value="06-Dirección Administrativa">Dirección Administrativa</option>
+            <option value="07-Dirección General Técnica">Dirección General Técnica</option>
+            <option value="08-Dirección Protección Vegetal">Dirección Protección Vegetal</option>
+            <option value="09-Dirección de Semillas">Dirección de Semillas</option>
+            <option value="10-Dirección de Agroquímicos e Insumos Agrícolas">Dirección de Agroquímicos e Insumos Agrícolas</option>
+            <option value="11-Dirección de Operaciones">Dirección de Operaciones</option>
+            <option value="12-Dirección de Laboratorios">Dirección de Laboratorios</option>
+            <option value="13-Dirección de Informática">Dirección de Informática</option>
+            <option value="14-Dirección de Gestión de Personas">Dirección de Gestión de Personas</option>
+            <option value="15-Secretaría de Comunicación">Secretaría de Comunicación</option>
+            <option value="16-Dirección de Calidad, Inocuidad y Agricultura Orgánica">Dirección de Calidad, Inocuidad y Agricultura Orgánica</option>
+            <option value="17-Secretaría General">Secretaría General</option>
+            <option value="18-Dirección de Contrataciones">Dirección de Contrataciones</option>
+            <option value="19-Secretaría de Gabinete">Secretaría de Gabinete</option>
+            <option value="20-Asesoría Jurídica">Asesoría Jurídica</option>
+            <option value="21-Auditoría Interna Institucional">Auditoría Interna Institucional</option>
+            <option value="22-Dirección de Bioseguridad Agrícola">Dirección de Bioseguridad Agrícola</option>
+            <option value="23-Dirección de Oficinas Regionales">Dirección de Oficinas Regionales</option>
+          </select>
+          <div class="container" *ngIf="repartText">
+            <div class="row">
+
+              <ul>
+
+                <li>
+                  Reparticion: {{repartText}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <label *ngIf="repart">Dependencia</label>
+          <select *ngIf="repart === '01'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-SECRETARIA GENERAL">SECRETARIA GENERAL</option>
+            <option value="3-AUDITORIA INTERNA INSTITUCIONAL">AUDITORIA INTERNA INSTITUCIONAL</option>
+            <option value="4-ASESORIA JURIDICA">ASESORIA JURIDICA</option>
+            <option value="11-ASESORIA TECNICA DE PRESIDENCIA">ASESORIA TECNICA DE PRESIDENCIA</option>
+            <option value="15-SECRETARIA PRIVADA">SECRETARIA PRIVADA</option>
+        </select>
+        <select *ngIf="repart === '02'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+
+        </select>
+        <select *ngIf="repart === '03'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="3-DEPARTAMENTO DE PROGRAMACION Y EVALUACION">DEPARTAMENTO DE PROGRAMACION Y EVALUACION</option>
+            <option value="4-DEPARTAMENTO DE RELACIONES PUBLICAS NACIONALES E INTERNACIONALES">DEPARTAMENTO DE RELACIONES PUBLICAS NACIONALES E INTERNACIONALES</option>
+            <option value="5-DEPARTAMENTO DE GEOESTADISTICA">DEPARTAMENTO DE GEOESTADISTICA</option>
+            <option value="7-DEPARTAMENTO DE SISTEMAS DE GESTION DE CALIDAD">DEPARTAMENTO DE SISTEMAS DE GESTION DE CALIDAD</option>
+        </select>
+
+        <select *ngIf="repart === '04'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-DIRECCION DE GESTION DE PERSONAS">DIRECCION DE GESTION DE PERSONAS</option>
+            <option value="3-UNIDAD DE CONTROL INTERNO">UNIDAD DE CONTROL INTERNO</option>
+            <option value="5-DIRECCION DE FINANZAS">DIRECCION DE FINANZAS</option>
+            <option value="6-DIRECCION ADMINISTRATIVA">DIRECCION ADMINISTRATIVA</option>
+            <option value="7-UNIDAD DE GESTION DE VIATICOS">UNIDAD DE GESTION DE VIATICOS</option>
+            <option value="8-UNIDAD DE OBRAS">UNIDAD DE OBRAS</option>
+
+        </select>
+        <br>
+
+        <select *ngIf="repart === '05'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-DEPARTAMENTO DE PRESUPUESTO">DEPARTAMENTO DE PRESUPUESTO</option>
+            <option value="3-DEPARTAMENTO DE TESORERIA">DEPARTAMENTO DE TESORERIA</option>
+            <option value="4-DEPARTAMENTO DE RECAUDACIONES">DEPARTAMENTO DE RECAUDACIONES</option>
+            <option value="5-DEPARTAMENTO DE CONTABILIDAD">DEPARTAMENTO DE CONTABILIDAD</option>
+            <option value="6-DEPARTAMENTO DE PATRIMONIO">DEPARTAMENTO DE PATRIMONIO</option>
+            <option value="7-DEPARTAMENTO DE RENDICION DE CUENTAS">DEPARTAMENTO DE RENDICION DE CUENTAS</option>
+            <option value="10-FONDO FIJO">FONDO FIJO</option>
+        </select>
+
+        <select *ngIf="repart === '06'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="3-DEPARTAMENTO DE SERVICIOS GENERALES">DEPARTAMENTO DE SERVICIOS GENERALES</option>
+            <option value="4-DEPARTAMENTO DE ADQUISICIONES Y SUMINISTROS">DEPARTAMENTO DE ADQUISICIONES Y SUMINISTROS</option>
+            <option value="5-DEPARTAMENTO DE TRANSPORTE">DEPARTAMENTO DE TRANSPORTE</option>
+            <option value="6-DEPARTAMENTO DE TALLER">DEPARTAMENTO DE TALLER</option>
+        </select>
+
+        <select *ngIf="repart === '07'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-COORDINACION REGIONAL">COORDINACION REGIONAL</option>
+            <option value="3-COORDINACION DE BIOTECNOLOGIA">COORDINACION DE BIOTECNOLOGIA</option>
+            <option value="4-REGIONAL PARAGUARI">REGIONAL PARAGUARI</option>
+            <option value="5-REGIONAL SAN IGNACIO MISIONES">REGIONAL SAN IGNACIO MISIONES</option>
+            <option value="6-REGIONAL PILAR">REGIONAL PILAR</option>
+            <option value="7-UNIDAD DE REGISTRO UNICO">UNIDAD DE REGISTRO UNICO</option>
+            <option value="13-UNIDAD DE REGISTROS">UNIDAD DE REGISTROS</option>
+            <option value="23-UNIDAD DE CONTROL DE APOYO A LA GESTION">UNIDAD DE CONTROL DE APOYO A LA GESTION</option>
+            <option value="24-UNIDAD DE ASESORIA ESPECIALIZADA">UNIDAD DE ASESORIA ESPECIALIZADA</option>
+        </select>
+        <select *ngIf="repart === '08'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="3-DEPARTAMENTO DE CUARENTENA VEGETAL">DEPARTAMENTO DE CUARENTENA VEGETAL</option>
+            <option value="4-DEPARTAMENTO DE VIGILANCIA FITOSANITARIA">DEPARTAMENTO DE VIGILANCIA FITOSANITARIA</option>
+            <option value="5-DEPARTAMENTO DE CAMPAÑAS FITOSANITARIAS">DEPARTAMENTO DE CAMPAÑAS FITOSANITARIAS</option>
+
+        </select>
+
+        <select *ngIf="repart === '09'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+          <option value="1-DESPACHO">DESPACHO</option>
+          <option value="2-DEPARTAMENTO DE CERTIFICACION DE SEMILLAS">DEPARTAMENTO DE CERTIFICACION DE SEMILLAS</option>
+          <option value="3-DEPARTAMENTO DE PROTECCION Y USO DE VARIEDADES">DEPARTAMENTO DE PROTECCION Y USO DE VARIEDADES</option>
+          <option value="4-DEPARTAMENTO DE COMERCIO DE SEMILLAS">DEPARTAMENTO DE COMERCIO DE SEMILLAS</option>
+          <option value="6-UNIDAD ISO 9001:2008/2015">UNIDAD ISO 9001:2008/2015</option>
+          <option value="7-UNIDAD DE ASESORIA ESPECIALIZADA Y CIENTIFICA">UNIDAD DE ASESORIA ESPECIALIZADA Y CIENTIFICA</option>
+          <option value="8-UNIDAD DE CONTROL Y OPERATIVO Y APOYO">UNIDAD DE CONTROL Y OPERATIVO Y APOYO</option>
+          <option value="9-COORD. SUPERV. Y SEGUIMIENTO PARCELAS SEMILLERAS DE PEQ.">COORD. SUPERV. Y SEGUIMIENTO PARCELAS SEMILLERAS DE PEQ.</option>
+        </select>
+
+        <select *ngIf="repart === '10'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-DEPARTAMENTO DE CONTROL Y EVALUACIONES DE INSUMOS">DEPARTAMENTO DE CONTROL Y EVALUACIONES DE INSUMOS</option>
+            <option value="3-DEPARTAMENTO DE DIVULGACIÓN Y MANEJO SEGURO DE LOS PLAGUICIDAS">DEPARTAMENTO DE DIVULGACIÓN Y MANEJO SEGURO DE LOS PLAGUICIDAS</option>
+            <option value="5-COMITE TECNICO EVALUADOR">COMITE TECNICO EVALUADOR</option>
+            <option value="6-DEPARTAMENTO DE EVALUACIÓN Y MITIGACIÓN DE RIESGO DE LOS PLAGUICIDAS">DEPARTAMENTO DE EVALUACIÓN Y MITIGACIÓN DE RIESGO DE LOS PLAGUICIDAS</option>
+        </select>
+
+        <select *ngIf="repart === '11'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="2-DEPARTAMENTO DE INSPECCION GENERAL">DEPARTAMENTO DE INSPECCION GENERAL</option>
+            <option value="3-UNIDAD  ISO 17020">UNIDAD  ISO 17020</option>
+            <option value="4-DEPARTAMENTO DE CERTIFICACION FITOSANITARIA">DEPARTAMENTO DE CERTIFICACION FITOSANITARIA</option>
+            <option value="6-PUESTO DE CONTROL-ENCARNACION">PUESTO DE CONTROL-ENCARNACION</option>
+            <option value="7-OPI-CDE">OPI-CDE</option>
+            <option value="8-PUESTO DE CONTROL-SALTO DEL GUAIRA">PUESTO DE CONTROL-SALTO DEL GUAIRA</option>
+            <option value="9-PUESTO DE CONTROL-PEDRO J. CABALLERO">PUESTO DE CONTROL-PEDRO J. CABALLERO</option>
+            <option value="10-PUESTO DE CONTROL-FALCON">PUESTO DE CONTROL-FALCON</option>
+            <option value="11-PUESTO DE CONTROL-CAPITAL">PUESTO DE CONTROL-CAPITAL</option>
+            <option value="12-OPI-VILLETA">OPI-VILLETA</option>
+            <option value="13-PUESTO DE CONTROL-CHACO`I">PUESTO DE CONTROL-CHACO`I</option>
+            <option value="14-PUESTO DE CONTROL-AEROPUERTO SILVIO PETTIROSSI">PUESTO DE CONTROL-AEROPUERTO SILVIO PETTIROSSI</option>
+            <option value="15-OPI-ITA ENRAMADA">OPI-ITA ENRAMADA</option>
+            <option value="16-PUESTO DE CONTROL-SANTA HELENA">PUESTO DE CONTROL-SANTA HELENA</option>
+            <option value="17-PUESTO DE CONTROL-AEROPUERTO GUARANI">PUESTO DE CONTROL-AEROPUERTO GUARANI</option>
+            <option value="18-PUESTO DE CONTROL-ALGESA">PUESTO DE CONTROL-ALGESA</option>
+            <option value="19-PUESTO DE CONTROL-CAACUPEMI">PUESTO DE CONTROL-CAACUPEMI</option>
+            <option value="20-PAKSA">PAKSA</option>
+            <option value="21-Puesto de control de Caacupe">Puesto de control de Caacupe</option>
+            <option value="22-PUESTO DE CONTROL-CONCEPCION">PUESTO DE CONTROL-CONCEPCION</option>
+            <option value="23-PUESTO DE CONTROL-ACI PUERTO ANTEQUERA">PUESTO DE CONTROL-ACI PUERTO ANTEQUERA</option>
+            <option value="24-PUESTO DE CONTROL-SAJONIA">PUESTO DE CONTROL-SAJONIA</option>
+            <option value="25-CAPECO-SALTO DEL GUAIRA">CAPECO-SALTO DEL GUAIRA</option>
+            <option value="26-PUESTO DE CONTROL TRES FRONTERAS">PUESTO DE CONTROL TRES FRONTERAS</option>
+            <option value="27-PUESTO DE CONTROL-PUERTO PABLA">PUESTO DE CONTROL-PUERTO PABLA</option>
+            <option value="28-PUESTO DE CONTROL-MARISCAL ESTIGARRIBIA">PUESTO DE CONTROL-MARISCAL ESTIGARRIBIA</option>
+            <option value="29-PUESTO DE CONTROL - PILAR">PUESTO DE CONTROL - PILAR</option>
+            <option value="30-PUESTO DE CONTROL - ACI CAMPESTRE">PUESTO DE CONTROL - ACI CAMPESTRE</option>
+            <option value="35-OPI FOZ DE IGUAZÚ">OPI FOZ DE IGUAZÚ</option>
+            <option value="36-PUESTO DE CONTROL - CORONEL OVIEDO">PUESTO DE CONTROL - CORONEL OVIEDO</option>
+            <option value="37-PUESTO DE CONTROL - 3 DE FEBRERO">PUESTO DE CONTROL - 3 DE FEBRERO</option>
+            <option value="38-PUESTO DE CONTROL - ADUANAS PJC">PUESTO DE CONTROL - ADUANAS PJC</option>
+            <option value="39-PUESTO DE CONTROL - PUERTO CAACUPEMI">PUESTO DE CONTROL - PUERTO CAACUPEMI</option>
+            <option value="40-PUESTO DE CONTROL - PUERTO FENIX">PUESTO DE CONTROL - PUERTO FENIX</option>
+            <option value="41-PUESTO DE CONTROL - PUERTO TERPORT SAN ANTONIO">PUESTO DE CONTROL - PUERTO TERPORT SAN ANTONIO</option>
+            <option value="42-PUESTO DE CONTROL - PUERTO VILLETA">PUESTO DE CONTROL - PUERTO VILLETA</option>
+            <option value="43-PUESTO DE CONTROL - PUERTO TERPORT VILLETA">PUESTO DE CONTROL - PUERTO TERPORT VILLETA</option>
+            <option value="44-PUESTO DE CONTROL - PUERTO SEGURO VILLETA">PUESTO DE CONTROL - PUERTO SEGURO VILLETA</option>
+            <option value="45-PUESTO DE CONTROL - CRUCE 6000">PUESTO DE CONTROL - CRUCE 6000</option>
+          </select>
+
+        <select *ngIf="repart === '12'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+            <option value="1-DESPACHO">DESPACHO</option>
+            <option value="3-LABORATORIO DE CALIDAD DE SEMILLAS Y CALIDAD VEGETAL">LABORATORIO DE CALIDAD DE SEMILLAS Y CALIDAD VEGETAL</option>
+            <option value="7-DEPARTAMENTO DE LABORATORIOS QUIMICOS">DEPARTAMENTO DE LABORATORIOS QUIMICOS</option>
+            <option value="8-DEPARTAMENTO DE LABORATORIO DE SANIDAD VEGETAL Y BIOLOGIA MOLECULAR">DEPARTAMENTO DE LABORATORIO DE SANIDAD VEGETAL Y BIOLOGIA MOLECULAR</option>
+            <option value="9-UNIDAD ISO 17025">UNIDAD ISO 17025</option>
+            <option value="10-UNIDAD DE MANTENIMINETO DE EQUIPOS">UNIDAD DE MANTENIMINETO DE EQUIPOS</option>
+            <option value="11-DEPARTAMENTO DE MUESTREO LABORATORIAL ESPECIALIZADO">DEPARTAMENTO DE MUESTREO LABORATORIAL ESPECIALIZADO</option>
+            <option value="12-LABORATORIO DE RESIDUOS DE PLAGUICIDAS">LABORATORIO DE RESIDUOS DE PLAGUICIDAS</option>
+
+        </select>
+
+        <select *ngIf="repart === '13'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+          <option value="1-DESPACHO">DESPACHO</option>
+          <option value="2-DEPARTAMENTO DE SOPORTE TECNICO">DEPARTAMENTO DE SOPORTE TECNICO</option>
+          <option value="3-DEPARTAMENTO DE REDES">DEPARTAMENTO DE REDES</option>
+          <option value="4-DEPARTAMENTO DE DESARROLLO DE SOFTWARE">DEPARTAMENTO DE DESARROLLO DE SOFTWARE</option>
+
+      </select>
+
+      <select *ngIf="repart === '14'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-DEPARTAMENTO ADMINISTRATIVO DEL PERSONAL">DEPARTAMENTO ADMINISTRATIVO DEL PERSONAL</option>
+        <option value="3-DEPARTAMENTO TECNICO Y CAPACITACION">DEPARTAMENTO TECNICO Y CAPACITACION</option>
+        <option value="4-DEPARTAMENTO DE BIENESTAR DEL PERSONAL">DEPARTAMENTO DE BIENESTAR DEL PERSONAL</option>
+
+    </select>
+
+        <select *ngIf="repart === '16'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+          <option value="1-DESPACHO">DESPACHO</option>
+          <option value="2-DEPARTAMENTO DE CALIDAD E INOCUIDAD DE VEGETALES">DEPARTAMENTO DE CALIDAD E INOCUIDAD DE VEGETALES</option>
+          <option value="3-DEPARTAMENTO DE AGRICULTURA ORGANICA">DEPARTAMENTO DE AGRICULTURA ORGANICA</option>
+          <option value="4-DEPARTAMENTO DE TRAZABILIDAD VEGETAL">DEPARTAMENTO DE TRAZABILIDAD VEGETAL</option>
+
+      </select>
+        <select *ngIf="repart === '17'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+          <option value="1-DESPACHO">DESPACHO</option>
+          <option value="2-DEPARTAMENTO MESA DE ENTRADA">DEPARTAMENTO MESA DE ENTRADA</option>
+          <option value="3-DEPARTAMENTO DE ARCHIVOS Y BIBLIOTECA">DEPARTAMENTO DE ARCHIVOS Y BIBLIOTECA</option>
+          <option value="4-UNIDAD NORMATIVA">UNIDAD NORMATIVA</option>
+          <option value="5-COORDINACIÓN DE DIGITALIZACIÓN">COORDINACIÓN DE DIGITALIZACIÓN</option>
+
+      </select>
+      <select *ngIf="repart === '18'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-DEPARTAMENTO DE LICITACION Y CONTRATACION DIRECTA">DEPARTAMENTO DE LICITACION Y CONTRATACION DIRECTA</option>
+        <option value="3-DEPARTEMENTO DE CONTRATOS Y GARANTIA">DEPARTEMENTO DE CONTRATOS Y GARANTIA</option>
+        <option value="4-DEPARTAMENTO DE PLANEAMIENTO Y EJECUCION">DEPARTAMENTO DE PLANEAMIENTO Y EJECUCION</option>
+
+    </select>
+
+        <select *ngIf="repart === '19'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+          <option value="1-DESPACHO">DESPACHO</option>
+          <option value="2-DEPARTAMENTO DE TRANSPARENCIA Y ANTICORRUPCION">DEPARTAMENTO DE TRANSPARENCIA Y ANTICORRUPCION</option>
+          <option value="3-UNIDAD DE MECIP">UNIDAD DE MECIP</option>
+          <option value="4-DEPARTAMENTO DE PRENSA Y COMUNICACION INSTITUCIONAL">DEPARTAMENTO DE PRENSA Y COMUNICACION INSTITUCIONAL</option>
+
+
+      </select>
+      <select *ngIf="repart === '20'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-STAFF ASESORES DICTAMINANTES">STAFF ASESORES DICTAMINANTES</option>
+        <option value="3-DEPARTAMENTO DE SUMARIO ADMINISTRATIVO">DEPARTAMENTO DE SUMARIO ADMINISTRATIVO</option>
+        <option value="4-DEPARTAMENTO DE CAUSAS JUDICIALES">DEPARTAMENTO DE CAUSAS JUDICIALES</option>
+        <option value="5-DIRECCIÓN DE ASESORÍA JURÍDICA">DIRECCIÓN DE ASESORÍA JURÍDICA</option>
+
+      </select>
+      <select *ngIf="repart === '21'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();" >
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-DEPARTAMENTO DE AUDITORIA DE GESTION">DEPARTAMENTO DE AUDITORIA DE GESTION</option>
+        <option value="3-DEPARTAMENTO DE AUDITORIA TECNICA">DEPARTAMENTO DE AUDITORIA TECNICA</option>
+        <option value="4-DEPARTAMENTO DE AUDITORIA FORENSE">DEPARTAMENTO DE AUDITORIA FORENSE</option>
+        <option value="5-DEPARTAMENTO DE AUDITORIA DE FINANZAS">DEPARTAMENTO DE AUDITORIA DE FINANZAS</option>
+
+      </select>
+
+      <select *ngIf="repart === '22'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-DEPARTAMENTO DE MANEJO DE ORGANISMOS GENETICAMENTE MODIF.">DEPARTAMENTO DE MANEJO DE ORGANISMOS GENETICAMENTE MODIF.</option>
+        <option value="3-DEPARTAMENTO DE EVALUACION DE BIOSEGURIDAD AGRICOLA">DEPARTAMENTO DE EVALUACIÓN DE BIOSEGURIDAD AGRÍCOLA</option>
+
+      </select>
+
+      <select *ngIf="repart === '23'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+        <option value="2-OFICINA REGIONAL DE MISIONES">OFICINA REGIONAL DE MISIONES</option>
+        <option value="3-OFICINA REGIONAL DE AMAMBAY">OFICINA REGIONAL DE AMAMBAY</option>
+        <option value="4-OFICINA REGIONAL CENTRAL">OFICINA REGIONAL CENTRAL</option>
+        <option value="5-OFICINA REGIONAL DE CANINDEYU">OFICINA REGIONAL DE CANINDEYU</option>
+        <option value="6-OFICINA REGIONAL PARAGUARI">OFICINA REGIONAL PARAGUARI</option>
+        <option value="7-OFICINA REGIONAL DE CONCEPCION">OFICINA REGIONAL DE CONCEPCION</option>
+        <option value="8-OFICINA REGIONAL DE ITAPUA">OFICINA REGIONAL DE ITAPUA</option>
+        <option value="9-OFICINA REGIONAL DE SAN PEDRO">OFICINA REGIONAL DE SAN PEDRO</option>
+        <option value="10-OFICINA REGIONAL CHACO CENTRAL.(CRUCE PIONEROS)">OFICINA REGIONAL CHACO CENTRAL.(CRUCE PIONEROS)</option>
+        <option value="11-OFICINA REGIONAL ALTO PARANA C.D.E.">OFICINA REGIONAL ALTO PARANA C.D.E.</option>
+        <option value="12-Oficina CETAPAR">Oficina CETAPAR</option>
+        <option value="13-OFICINA REGIONAL DE CAAGUAZU">OFICINA REGIONAL DE CAAGUAZU</option>
+        <option value="14-OFICINA REGIONAL CORONEL BOGADO">OFICINA REGIONAL CORONEL BOGADO</option>
+        <option value="15-OFICINA REGIONAL GENERAL DELGADO">OFICINA REGIONAL GENERAL DELGADO</option>
+        <option value="16-OFICINA REGIONAL MARIA AUXILIADORA">OFICINA REGIONAL MARIA AUXILIADORA</option>
+        <option value="17-OFICINA REGIONAL DE GUAIRÁ">OFICINA REGIONAL DE GUAIRÁ</option>
+        <option value="18-OFICINA REGIONAL DE CAAZAPÁ">OFICINA REGIONAL DE CAAZAPÁ</option>
+        <option value="19-OFICINA REGIONAL DE CONCEPCION - SEDE HORQUETA">OFICINA REGIONAL DE CONCEPCION - SEDE HORQUETA</option>
+        <option value="20-DEPARTAMENTO DE FISCALIZACIÓN">DEPARTAMENTO DE FISCALIZACIÓN</option>
+        <option value="21-OFICINA REGIONAL CORDILLERA">OFICINA REGIONAL CORDILLERA</option>
+      </select>
+          <div class="container" *ngIf="dependText">
+            <div class="row">
+
+              <ul>
+
+                <li>
+                  Dependencia: {{dependText}}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="search-hero">
+            <input class="form-control" type="text" name="searchF" [(ngModel)]="searchTextFuncionario" autocomplete="off" placeholder="Ingrese palabra clave para buscar funcionario">
+          </div>
+
+          <label >Responsable</label>
+          <select class="form-select"  name="responsable" [(ngModel)]="nuevoResponsable.nombre" (change)="cambios();">
+            <option *ngFor="let item of funcionarios | filter:searchTextFuncionario" >
+           {{ item.name}} - {{item.groups_2_description}}</option>
+
+
+          </select>
+
+        <label *ngIf="nuevoResponsable.nombre">Nombre: {{nuevoResponsable.nombre}}</label>
+        <br>
+        <label *ngIf="nuevoResponsable.nombre">Cargo: {{nuevoResponsable.cargo}}</label>
+
+
+
+      <br>
+      <!--<label>Ingrese Nº de Comprobante</label>
+              <input type="text" name="factura" class="form-control" placeholder="Comprobante"
+              [(ngModel)]="this.contador" maxlength="25">-->
+
+      <br>
+
+
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-info" (click)="generarInforme2()">Generar Informe</button>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+

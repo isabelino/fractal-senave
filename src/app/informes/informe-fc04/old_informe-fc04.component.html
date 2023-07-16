@@ -1,0 +1,207 @@
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Asignar Bienes
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+
+
+
+
+            <form class="justify-content-center" (ngSubmit)="agregar()">
+
+
+              <select name="prueba" [(ngModel)]="nuevo.nombre" class="form-control">
+                <option *ngFor="let item of bienes" >
+                {{item.description}}</option>
+
+              </select>
+
+              <label >Cantidad</label>
+              <input type="number" name="cantidad" class="form-control" placeholder="cantidad"
+                [(ngModel)]="nuevo.cantidad" maxlength="25">
+              <br>
+              <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+
+
+      <br>
+      <div class="container">
+        <div class="row">
+
+          <ul>
+
+            <li *ngFor="let item of bien">
+              nombre: {{item.nombre}} - cantidad: {{item.cantidad}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Dependencia Remitente y Receptora
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+
+        <div class="container">
+          <div class="row">
+            <form class="row" (ngSubmit)="guardar()">
+              <div class="col-sm">
+                <h4>Dependencia Remitente</h4>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Entidad</label>
+                    <input type="text" name="entidadr"  class="form-control" placeholder="Entidad"
+                    [(ngModel)]="entidadr" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Unidad Jerarquica</label>
+                    <input type="text" class="form-control" name="unidadr" placeholder="Unidad Jerarquica"
+                    [(ngModel)]="unidadr" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Reparticion</label>
+                    <input type="text" class="form-control" name="reparticionr" placeholder="Reparticion"
+                    [(ngModel)]="reparticionr" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Dependencia</label>
+                    <input type="text" class="form-control" name="dependenciar" placeholder="Dependencia"
+                    [(ngModel)]="dependenciar" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Area</label>
+                    <input type="text" class="form-control"  name="arear" placeholder="Area"
+                    [(ngModel)]="arear" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Lugar</label>
+                    <input type="text" class="form-control" name="lugarr" placeholder="Lugar"
+                    [(ngModel)]="lugarr" maxlength="25" required>
+                  </div>
+
+                </div>
+                <br>
+                <p>Seleccione Origen o Movimiento</p>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="ALTA" [(ngModel)]="origen" checked>
+                  <label class="form-check-label" for="radio1">ALTA</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="BAJA" [(ngModel)]="origen">
+                  <label class="form-check-label" for="radio2">BAJA</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="COMPRA" [(ngModel)]="origen">
+                  <label class="form-check-label" for="radio3">COMPRA</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="DONACIONES" [(ngModel)]="origen">
+                  <label class="form-check-label" for="radio4">DONACIONES</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio5" name="optradio" value="TRANSPASO" [(ngModel)]="origen">
+                  <label class="form-check-label" for="radio5">TRANSPASO</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="radio6" name="optradio" value="REPARACION">
+                  <label class="form-check-label" for="radio6">REPARACION MAYOR</label>
+                </div>
+              </div>
+              <div class="col-sm">
+                <h4>Dependencia Receptora</h4>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Entidad</label>
+                    <input type="text" name="entidad" class="form-control" placeholder="Entidad"
+                    [(ngModel)]="entidad" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Unidad Jerarquica</label>
+                    <input type="text" name="unidad" class="form-control" placeholder="Unidad Jerarquica"
+                    [(ngModel)]="unidad" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Reparticion</label>
+                    <input type="text" name="reparticion" class="form-control"  placeholder="Reparticion"
+                    [(ngModel)]="reparticion" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Dependencia</label>
+                    <input type="text" name="dependencia" class="form-control" placeholder="Dependencia"
+                    [(ngModel)]="dependencia" maxlength="25" required>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Area</label>
+                    <input type="text" name="area" class="form-control"  placeholder="Area"
+                    [(ngModel)]="area" maxlength="25" required>
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label >Lugar</label>
+                    <input
+                          type="text"
+                          name="lugar"
+                          class="form-control"
+                          placeholder="Lugar"
+                          [(ngModel)]="lugar" maxlength="25" required>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-info" (click)="generarInforme()">Generar Informe</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--<button (click)="createPdf()">Crear Formulario</button>-->
+
+
+
