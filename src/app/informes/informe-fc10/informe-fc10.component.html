@@ -41,27 +41,41 @@
         <div style="float: right;margin: 10px;" *ngIf="this.habilitarBoton">
           <button type="submit" class="btn btn-primary " (click)="nuevoInforme()" >Nuevo Informe</button>
         </div>
+
+
+
         <br>
 
           <div *ngIf=" this.valorInforme==='total' ">
 
+            <label for="">Filtrar por Fecha (Opcional):</label>
             <div>
               <input class="form-control" type="date" name="search" [(ngModel)]="searchText2" autocomplete="off" placeholder="Ingrese filtro de fecha opcional ejemplo 2000-01-10" value="2000-01-01">
             </div>
             <br>
-            <div>
-              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Ingrese palabra clave para buscar localización">
-            </div>
 
 
-
-            <label for="">Filtrar por Localización:</label>
-            <select name="prueba"  class="form-control" [(ngModel)]="localizacion" (change)="seleccionarLocalizacion()">
-              <option *ngFor="let item of datos | filter:searchText"  [ngValue]="item.code">
-              {{item.description}}</option>
+            <label for="">Filtrar por Proveedor(Opcional):</label>
+            <select name="prueba"  class="form-control" [(ngModel)]="searchTextProveedor" (change)="seleccionarProveedores()">
+              <option *ngFor="let item of nombresProveedores let i = index"  value="{{item.name}}">
+              {{item.name}}</option>
 
             </select>
+              <br>
+              <label for="">Filtrar por Localización:</label>
 
+              <div>
+                <input class="form-control" type="text" name="search3" [(ngModel)]="searchText" autocomplete="off" placeholder="Ingrese palabra clave para buscar localización">
+              </div>
+
+
+
+              <label for="">Seleccione una Localización:</label>
+              <select name="prueba"  class="form-control" [(ngModel)]="localizacion" (change)="seleccionarLocalizacion()">
+                <option *ngFor="let item of datos | filter:searchText"  [ngValue]="item.code">
+                {{item.description}}</option>
+
+              </select>
 
 
 
@@ -136,7 +150,7 @@
           <label >Repartición</label>
           <select class="form-select" aria-label="Default select example" name="reparticion" [(ngModel)]="repart" (change)="separarReparticion();">
             <option value="01-Presidencia">Presidencia</option>
-            <option value="02-Secretaría De Relaciones Externas">Secretaría De Relaciones Externas</option>
+            <!--<option value="02-Secretaría De Relaciones Externas">Secretaría De Relaciones Externas</option>-->
             <option value="03-Secretaría de Planificación">Secretaría de Planificación</option>
             <option value="04-Dirección General de Administración y Finanzas">Dirección General de Administración y Finanzas</option>
             <option value="05-Dirección de Finanzas">Dirección de Finanzas</option>
@@ -149,15 +163,16 @@
             <option value="12-Dirección de Laboratorios">Dirección de Laboratorios</option>
             <option value="13-Dirección de Informática">Dirección de Informática</option>
             <option value="14-Dirección de Gestión de Personas">Dirección de Gestión de Personas</option>
-            <option value="15-Secretaría de Comunicación">Secretaría de Comunicación</option>
+            <!--<option value="15-Secretaría de Comunicación">Secretaría de Comunicación</option>-->
             <option value="16-Dirección de Calidad, Inocuidad y Agricultura Orgánica">Dirección de Calidad, Inocuidad y Agricultura Orgánica</option>
             <option value="17-Secretaría General">Secretaría General</option>
             <option value="18-Dirección de Contrataciones">Dirección de Contrataciones</option>
             <option value="19-Secretaría de Gabinete">Secretaría de Gabinete</option>
-            <option value="20-Asesoría Jurídica">Asesoría Jurídica</option>
+            <option value="20-Dirección de Asesoría Jurídica">Dirección de Asesoría Jurídica</option>
             <option value="21-Auditoría Interna Institucional">Auditoría Interna Institucional</option>
             <option value="22-Dirección de Bioseguridad Agrícola">Dirección de Bioseguridad Agrícola</option>
             <option value="23-Dirección de Oficinas Regionales">Dirección de Oficinas Regionales</option>
+            <option value="24-Dirección General de Asuntos Jurídicos">Dirección General de Asuntos Jurídicos</option>
           </select>
           <div class="container" *ngIf="repartText">
             <div class="row">
@@ -179,10 +194,10 @@
             <option value="11-ASESORIA TECNICA DE PRESIDENCIA">ASESORIA TECNICA DE PRESIDENCIA</option>
             <option value="15-SECRETARIA PRIVADA">SECRETARIA PRIVADA</option>
         </select>
-        <select *ngIf="repart === '02'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+        <!--<select *ngIf="repart === '02'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
 
 
-        </select>
+        </select>-->
         <select *ngIf="repart === '03'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
             <option value="1-DESPACHO">DESPACHO</option>
             <option value="3-DEPARTAMENTO DE PROGRAMACION Y EVALUACION">DEPARTAMENTO DE PROGRAMACION Y EVALUACION</option>
@@ -406,7 +421,7 @@
         <option value="5-OFICINA REGIONAL DE CANINDEYU">OFICINA REGIONAL DE CANINDEYU</option>
         <option value="6-OFICINA REGIONAL PARAGUARI">OFICINA REGIONAL PARAGUARI</option>
         <option value="7-OFICINA REGIONAL DE CONCEPCION">OFICINA REGIONAL DE CONCEPCION</option>
-        <option value="8-OFICINA REGIONAL DE ITAPUA">OFICINA REGIONAL DE ITAPUA</option>
+        <option value="8-OFICINA REGIONAL DE ITAPUA SUR-CORONEL BOGADO">OFICINA REGIONAL DE ITAPUA SUR-CORONEL BOGADO</option>
         <option value="9-OFICINA REGIONAL DE SAN PEDRO">OFICINA REGIONAL DE SAN PEDRO</option>
         <option value="10-OFICINA REGIONAL CHACO CENTRAL.(CRUCE PIONEROS)">OFICINA REGIONAL CHACO CENTRAL.(CRUCE PIONEROS)</option>
         <option value="11-OFICINA REGIONAL ALTO PARANA C.D.E.">OFICINA REGIONAL ALTO PARANA C.D.E.</option>
@@ -414,12 +429,18 @@
         <option value="13-OFICINA REGIONAL DE CAAGUAZU">OFICINA REGIONAL DE CAAGUAZU</option>
         <option value="14-OFICINA REGIONAL CORONEL BOGADO">OFICINA REGIONAL CORONEL BOGADO</option>
         <option value="15-OFICINA REGIONAL GENERAL DELGADO">OFICINA REGIONAL GENERAL DELGADO</option>
-        <option value="16-OFICINA REGIONAL MARIA AUXILIADORA">OFICINA REGIONAL MARIA AUXILIADORA</option>
+        <option value="16-OFICINA REGIONAL ITAPUA NORTE-MARIA AUXILIADORA">OFICINA REGIONAL ITAPUA NORTE-MARIA AUXILIADORA</option>
         <option value="17-OFICINA REGIONAL DE GUAIRÁ">OFICINA REGIONAL DE GUAIRÁ</option>
         <option value="18-OFICINA REGIONAL DE CAAZAPÁ">OFICINA REGIONAL DE CAAZAPÁ</option>
         <option value="19-OFICINA REGIONAL DE CONCEPCION - SEDE HORQUETA">OFICINA REGIONAL DE CONCEPCION - SEDE HORQUETA</option>
         <option value="20-DEPARTAMENTO DE FISCALIZACIÓN">DEPARTAMENTO DE FISCALIZACIÓN</option>
         <option value="21-OFICINA REGIONAL CORDILLERA">OFICINA REGIONAL CORDILLERA</option>
+        <option value="22-OFICINA REGIONAL DE ITAPUA SUR-ENCARNACION">OFICINA REGIONAL DE ITAPUA SUR-ENCARNACION</option>
+      </select>
+      <select *ngIf="repart === '24'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
+
+        <option value="1-DESPACHO">DESPACHO</option>
+
       </select>
           <div class="container" *ngIf="dependText">
             <div class="row">
@@ -440,10 +461,17 @@
           <label >Responsable</label>
           <select class="form-select"  name="responsable" [(ngModel)]="nuevoResponsable.nombre" (change)="cambios();">
             <option *ngFor="let item of funcionarios | filter:searchTextFuncionario" >
-           {{ item.name}} - {{item.groups_2_description}}</option>
+              {{ item.rh_funnombre }} {{item.rh_funapellido}} - {{item.rh_desfun}}</option>
 
 
           </select>
+          <!--<label >Responsable</label>
+          <select class="form-select"  name="responsable" [(ngModel)]="nuevoResponsable.nombre" (change)="cambios();">
+            <option *ngFor="let item of funcionarios | filter:searchTextFuncionario" >
+           {{ item.name}} - {{item.groups_2_description}}</option>
+
+
+          </select>-->
 
         <label *ngIf="nuevoResponsable.nombre">Nombre: {{nuevoResponsable.nombre}}</label>
         <br>

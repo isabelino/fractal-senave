@@ -7,6 +7,7 @@ import { InformeFc05Component } from 'src/app/informes/informe-fc05/informe-fc05
 import { InformeFc03Component } from 'src/app/informes/informe-fc03/informe-fc03.component';
 import { InformeFc06Component } from 'src/app/informes/informe-fc06/informe-fc06.component';
 import { InformeSearchComponent } from 'src/app/informes/informe-search/informe-search.component';
+import { InformeValoresContablesComponent } from 'src/app/informes/informe-valores-contables/informe-valores-contables.component';
 
 
 
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path:'fcSearch',
     component: InformeSearchComponent
+  },
+  {
+    path:'valores-contables',
+    component: InformeValoresContablesComponent
   },
 
   {

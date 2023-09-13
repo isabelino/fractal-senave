@@ -10,6 +10,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { InformeFc06Component } from './informe-fc06/informe-fc06.component';
 import { InformeSearchComponent } from './informe-search/informe-search.component';
 import { InformeFc03Component } from './informe-fc03/informe-fc03.component';
+import { InformeValoresContablesComponent } from './informe-valores-contables/informe-valores-contables.component';
 
 
 
@@ -22,7 +23,8 @@ import { InformeFc03Component } from './informe-fc03/informe-fc03.component';
     InformeFc05Component,
     InformeFc03Component,
     InformeFc06Component,
-    InformeSearchComponent
+    InformeSearchComponent,
+    InformeValoresContablesComponent
   ],
   imports: [
     CommonModule,

@@ -17,7 +17,7 @@ export class InformesApiService {
 
   private baseapiUrl: string = 'http://localhost:5000/api/v1.0/';
   //private baseapiUrl: string = 'https://senave.apisgateway.duckdns.org/api/v1.0/';
-
+  //private baseapiUrl: string = 'http://192.168.10.249:5000/api/v1.0/';
 
 
   contadorInformes(): Observable<any>{

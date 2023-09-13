@@ -82,13 +82,18 @@ filtroBienPatrimonial(codigo:string):Observable<any>{
     );
   }
 
-  private urlFinalFuncionarios:string = "https://app.fracttal.com/api/personnel";
-  //private urlFinalFuncionarios:string ="http://190.128.218.138:8018/funcionarios";
+  //private urlFinalFuncionarios:string = "https://app.fracttal.com/api/personnel";
+  private urlFinalFuncionarios:string ="http://192.168.10.155:8081/funcionarios";
+
+  private headerfuncionario= {'content-type':'application/json'};
   todosFuncionarios2(): Observable<any>{
     console.log("esto tambien");
-    return this.http.get<any>(this.urlFinalFuncionarios,{ headers: this.httpOptions.headers}).pipe(
+    return this.http.get<any>(this.urlFinalFuncionarios,{ headers: this.headerfuncionario}).pipe(
       map( (response) => response as any )
     );
+    /*return this.http.get<any>(this.urlFinalFuncionarios,{ headers: this.httpOptions.headers}).pipe(
+      map( (response) => response as any )
+    );*/
   }
 
   todosDatos1(): Observable<any>{
@@ -112,6 +117,24 @@ filtroBienPatrimonial(codigo:string):Observable<any>{
   todosDatos3(): Observable<any>{
     console.log("aqui");
     return this.http.get<any>(this.urlFinalDato,{ headers: this.httpOptions.headers}).pipe(
+      map( (response) => response as any )
+    );
+  }
+
+  private urlFinalFiltroProvider:string = "https://app.fracttal.com/api/items_third_parties";
+  filtrarProveedores(nombre:string):Observable<any>{
+    console.log("servicio filtro proveedor");
+    const url5 = `${ this.urlFinalFiltroProvider }/?third_parties_name=${nombre}`;
+    return this.http.get<any>(url5,{ headers: this.httpOptions.headers}).pipe(
+      map( (response) => response as any )
+    );
+  }
+
+  private urlFinalAllProvider:string = "https://app.fracttal.com/api/third_parties";
+  todosProveedores():Observable<any>{
+    console.log("servicio filtro proveedor");
+    const url5 = `${ this.urlFinalAllProvider }`;
+    return this.http.get<any>(url5,{ headers: this.httpOptions.headers}).pipe(
       map( (response) => response as any )
     );
   }
