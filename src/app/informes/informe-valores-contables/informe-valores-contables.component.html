@@ -1,14 +1,27 @@
+<h2>Consolidación de bienes de uso</h2>
 <div class="container">
+  <br>
+  <br>
   <div class="row">
 
-    <h3>Ingrese codigo de Rotulado:</h3>
-    <div class="container">
-      <div class="row">
-        <input class="form-control" type="text" name="rotulo" id="rotulo" >
+    <form class="justify-content-center" (ngSubmit)="buscar()">
+      <input type="text" name="codigo" class="form-control" placeholder="Ingrese Código de rotulado"
+        [(ngModel)]="rotulado" maxlength="50">
+      <br>
+      <button  class="btn btn-primary mt-4" type="submit">Buscar</button>
+      <br>
 
-        <button class="btn btn-info">Buscar</button>
-      </div>
-    </div>
 
-  </div>
+      <label  *ngIf="this.resultadoConsulta" >Rotulado: {{this.resultadoConsulta.barcode}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Cuenta Mayor: {{this.resultadoConsulta.custom_fields_values[0].value}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Especificación: {{this.resultadoConsulta.custom_fields_values[1].value}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Sub Especificación: {{this.resultadoConsulta.custom_fields_values[2].value}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Detalle: {{this.resultadoConsulta.description}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Fecha Incorporacion: {{this.resultadoConsulta.purchase_date}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >Valor Incorporacion:Gs. {{this.total}}</label><br>
+      <label  *ngIf="this.resultadoConsulta" >40% del Valor de Incorporacion:Gs. {{this.porcentajeTotal}}</label><br>
+
+    </form>
+
 </div>
+

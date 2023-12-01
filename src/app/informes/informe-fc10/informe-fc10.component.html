@@ -239,15 +239,10 @@
 
         <select *ngIf="repart === '07'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
             <option value="1-DESPACHO">DESPACHO</option>
-            <option value="2-COORDINACION REGIONAL">COORDINACION REGIONAL</option>
-            <option value="3-COORDINACION DE BIOTECNOLOGIA">COORDINACION DE BIOTECNOLOGIA</option>
-            <option value="4-REGIONAL PARAGUARI">REGIONAL PARAGUARI</option>
-            <option value="5-REGIONAL SAN IGNACIO MISIONES">REGIONAL SAN IGNACIO MISIONES</option>
-            <option value="6-REGIONAL PILAR">REGIONAL PILAR</option>
-            <option value="7-UNIDAD DE REGISTRO UNICO">UNIDAD DE REGISTRO UNICO</option>
-            <option value="13-UNIDAD DE REGISTROS">UNIDAD DE REGISTROS</option>
-            <option value="23-UNIDAD DE CONTROL DE APOYO A LA GESTION">UNIDAD DE CONTROL DE APOYO A LA GESTION</option>
-            <option value="24-UNIDAD DE ASESORIA ESPECIALIZADA">UNIDAD DE ASESORIA ESPECIALIZADA</option>
+            <option value="2-UNIDAD DE REGISTROS">UNIDAD DE REGISTROS</option>
+            <option value="3-UNIDAD DE CONTROL DE APOYO A LA GESTION">UNIDAD DE CONTROL DE APOYO A LA GESTION</option>
+            <option value="4-UNIDAD DE ASESORIA ESPECIALIZADA">UNIDAD DE ASESORIA ESPECIALIZADA</option>
+            <option value="5-UNIDAD DE CONTROL Y EVALUACION TECNICA">UNIDAD DE CONTROL Y EVALUACION TECNICA</option>
         </select>
         <select *ngIf="repart === '08'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">
             <option value="1-DESPACHO">DESPACHO</option>
@@ -480,9 +475,9 @@
 
 
       <br>
-      <!--<label>Ingrese Nº de Comprobante</label>
+      <label>Ingrese Nº de Comprobante</label>
               <input type="text" name="factura" class="form-control" placeholder="Comprobante"
-              [(ngModel)]="this.contador" maxlength="25">-->
+              [(ngModel)]="this.contador" maxlength="25">
 
       <br>
 
