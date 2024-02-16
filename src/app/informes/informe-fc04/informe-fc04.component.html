@@ -51,6 +51,7 @@
 
                 <label *ngIf="this.resultadoConsulta" for="">Resultado: {{this.resultadoConsulta.description}}</label>
 
+
               </form>
 
 
@@ -121,8 +122,29 @@
                   {{item.description}}</option>
 
                 </select>
+                <br>
+                <br>
 
+                <div style="  border-width: 1px;
+                border-style: solid;
+                border-color: rgb(170, 240, 188);">
+                  <form class="justify-content-center" ngNativeValidate (ngSubmit)="guardarTotal()">
+                    <label>Ingrese Nº de Comprobante</label>
+                    <input type="text" required name="factura" class="form-control" placeholder="Comprobante"
+                    [(ngModel)]="nuevo2.factura" maxlength="25" >
+                    <br>
+                    <label>Seleccione el tipo de documento: {{this.nuevo2.tipo}}</label>
 
+                    <select class="form-select" required name="tipo_doc"  [(ngModel)]="this.nuevo2.tipo" >
+                      <option value="factura">Factura</option>
+                      <option value="acta de recepción">Acta de recepción</option>
+                      <option value="acta de donación">Acta de donación</option>
+                      <option value="nota">Nota</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary mt-4">Agregar</button>
+                  </form>
+                </div>
 
 
 
@@ -130,6 +152,7 @@
               <div class="container" >
                 <div class="row">
                   <label for="" *ngIf="cantidadBienesLocalizado != 0">Esta localizacion tiene asignada {{cantidadBienesLocalizado}} bienes activos</label>
+                  <label *ngIf="this.facturaTipo" for="">{{this.facturaTipo}}</label>
                 </div>
 
               </div>
@@ -330,38 +353,38 @@
               <option value="8-PUESTO DE CONTROL-SALTO DEL GUAIRA">PUESTO DE CONTROL-SALTO DEL GUAIRA</option>
               <option value="9-PUESTO DE CONTROL-PEDRO J. CABALLERO">PUESTO DE CONTROL-PEDRO J. CABALLERO</option>
               <option value="10-PUESTO DE CONTROL-FALCON">PUESTO DE CONTROL-FALCON</option>
-              <option value="11-PUESTO DE CONTROL-CAPITAL">PUESTO DE CONTROL-CAPITAL</option>
+              <!--<option value="11-PUESTO DE CONTROL-CAPITAL">PUESTO DE CONTROL-CAPITAL</option>-->
               <option value="12-OPI-VILLETA">OPI-VILLETA</option>
               <option value="13-PUESTO DE CONTROL-CHACO`I">PUESTO DE CONTROL-CHACO`I</option>
               <option value="14-PUESTO DE CONTROL-AEROPUERTO SILVIO PETTIROSSI">PUESTO DE CONTROL-AEROPUERTO SILVIO PETTIROSSI</option>
               <option value="15-OPI-ITA ENRAMADA">OPI-ITA ENRAMADA</option>
               <option value="16-PUESTO DE CONTROL-SANTA HELENA">PUESTO DE CONTROL-SANTA HELENA</option>
-              <option value="17-PUESTO DE CONTROL-AEROPUERTO GUARANI">PUESTO DE CONTROL-AEROPUERTO GUARANI</option>
+              <!--<option value="17-PUESTO DE CONTROL-AEROPUERTO GUARANI">PUESTO DE CONTROL-AEROPUERTO GUARANI</option>-->
               <option value="18-PUESTO DE CONTROL-ALGESA">PUESTO DE CONTROL-ALGESA</option>
               <option value="19-PUESTO DE CONTROL-CAACUPEMI">PUESTO DE CONTROL-CAACUPEMI</option>
               <option value="20-PAKSA">PAKSA</option>
-              <option value="21-Puesto de control de Caacupe">Puesto de control de Caacupe</option>
+              <!--<option value="21-Puesto de control de Caacupe">Puesto de control de Caacupe</option>-->
               <option value="22-PUESTO DE CONTROL-CONCEPCION">PUESTO DE CONTROL-CONCEPCION</option>
-              <option value="23-PUESTO DE CONTROL-ACI PUERTO ANTEQUERA">PUESTO DE CONTROL-ACI PUERTO ANTEQUERA</option>
-              <option value="24-PUESTO DE CONTROL-SAJONIA">PUESTO DE CONTROL-SAJONIA</option>
+              <!--<option value="23-PUESTO DE CONTROL-ACI PUERTO ANTEQUERA">PUESTO DE CONTROL-ACI PUERTO ANTEQUERA</option>-->
+              <!--<option value="24-PUESTO DE CONTROL-SAJONIA">PUESTO DE CONTROL-SAJONIA</option>-->
               <option value="25-CAPECO-SALTO DEL GUAIRA">CAPECO-SALTO DEL GUAIRA</option>
-              <option value="26-PUESTO DE CONTROL TRES FRONTERAS">PUESTO DE CONTROL TRES FRONTERAS</option>
-              <option value="27-PUESTO DE CONTROL-PUERTO PABLA">PUESTO DE CONTROL-PUERTO PABLA</option>
+              <!--<option value="26-PUESTO DE CONTROL TRES FRONTERAS">PUESTO DE CONTROL TRES FRONTERAS</option>
+              <option value="27-PUESTO DE CONTROL-PUERTO PABLA">PUESTO DE CONTROL-PUERTO PABLA</option>-->
               <option value="28-PUESTO DE CONTROL-MARISCAL ESTIGARRIBIA">PUESTO DE CONTROL-MARISCAL ESTIGARRIBIA</option>
               <option value="29-PUESTO DE CONTROL - PILAR">PUESTO DE CONTROL - PILAR</option>
               <option value="30-PUESTO DE CONTROL - ACI CAMPESTRE">PUESTO DE CONTROL - ACI CAMPESTRE</option>
               <option value="35-OPI FOZ DE IGUAZÚ">OPI FOZ DE IGUAZÚ</option>
-              <option value="36-PUESTO DE CONTROL - CORONEL OVIEDO">PUESTO DE CONTROL - CORONEL OVIEDO</option>
-              <option value="37-PUESTO DE CONTROL - 3 DE FEBRERO">PUESTO DE CONTROL - 3 DE FEBRERO</option>
-              <option value="38-PUESTO DE CONTROL - ADUANAS PJC">PUESTO DE CONTROL - ADUANAS PJC</option>
 
-              <option value="39-PUESTO DE CONTROL - PUERTO CAACUPEMI">PUESTO DE CONTROL - PUERTO CAACUPEMI</option>
+              <!--<option value="38-PUESTO DE CONTROL - ADUANAS PJC">PUESTO DE CONTROL - ADUANAS PJC</option>
+
+              <option value="39-PUESTO DE CONTROL - PUERTO CAACUPEMI">PUESTO DE CONTROL - PUERTO CAACUPEMI</option>-->
               <option value="40-PUESTO DE CONTROL - PUERTO FENIX">PUESTO DE CONTROL - PUERTO FENIX</option>
               <option value="41-PUESTO DE CONTROL - PUERTO TERPORT SAN ANTONIO">PUESTO DE CONTROL - PUERTO TERPORT SAN ANTONIO</option>
               <option value="42-PUESTO DE CONTROL - PUERTO VILLETA">PUESTO DE CONTROL - PUERTO VILLETA</option>
               <option value="43-PUESTO DE CONTROL - PUERTO TERPORT VILLETA">PUESTO DE CONTROL - PUERTO TERPORT VILLETA</option>
               <option value="44-PUESTO DE CONTROL - PUERTO SEGURO VILLETA">PUESTO DE CONTROL - PUERTO SEGURO VILLETA</option>
-              <option value="45-PUESTO DE CONTROL - CRUCE 6000">PUESTO DE CONTROL - CRUCE 6000</option>
+              <option value="45-AEROPUERTO GUARANI">AEROPUERTO GUARANI</option>
+
 
           </select>
 
@@ -485,6 +508,9 @@
           <option value="20-DEPARTAMENTO DE FISCALIZACIÓN">DEPARTAMENTO DE FISCALIZACIÓN</option>
           <option value="21-OFICINA REGIONAL CORDILLERA">OFICINA REGIONAL CORDILLERA</option>
           <option value="22-OFICINA REGIONAL DE ITAPUA SUR-ENCARNACION">OFICINA REGIONAL DE ITAPUA SUR-ENCARNACION</option>
+          <option value="36-PUESTO DE CONTROL - CORONEL OVIEDO">PUESTO DE CONTROL - CORONEL OVIEDO</option>
+          <option value="37-PUESTO DE CONTROL - 3 DE FEBRERO">PUESTO DE CONTROL - 3 DE FEBRERO</option>
+          <option value="45-PUESTO DE CONTROL - CRUCE 6000">PUESTO DE CONTROL - CRUCE 6000</option>
         </select>
 
         <select *ngIf="repart === '24'" class="form-select" aria-label="Default select example" name="dependenciap" [(ngModel)]="depend" (change)="separarDependencia();">

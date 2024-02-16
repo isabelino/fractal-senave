@@ -15,9 +15,10 @@ export class InformesApiService {
 
   constructor(private http:HttpClient) {}
 
-  private baseapiUrl: string = 'http://localhost:5000/api/v1.0/';
+  private baseapiUrl: string = 'http://localhost:5000/api/v2/';
   //private baseapiUrl: string = 'https://senave.apisgateway.duckdns.org/api/v1.0/';
   //private baseapiUrl: string = 'http://192.168.10.249:5000/api/v1.0/';
+  //private baseapiUrl: string = 'https://senave-apiv2.dr2gsistemas.duckdns.org/api/v2/'
 
 
   contadorInformes(): Observable<any>{
@@ -29,6 +30,13 @@ export class InformesApiService {
 
   getContadorInforme(informe:string): Observable<any>{
     const urlget = `${ this.baseapiUrl}contador/${informe}`;
+    return this.http.get<any>(urlget).pipe(
+      map( (response) => response as any )
+    );
+  }
+
+  getContadorYearInforme(informe:string): Observable<any>{
+    const urlget = `${ this.baseapiUrl}year/${informe}`;
     return this.http.get<any>(urlget).pipe(
       map( (response) => response as any )
     );
